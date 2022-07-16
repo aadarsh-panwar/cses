@@ -28,17 +28,27 @@ int occurence(vector<int> &v, int num, bool left) {
     }
     return pos;
 }
-
+void print(vector<int> &v) {
+    for(auto it: v)
+    cout << it <<" ";
+    cout << endl;
+}
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(NULL);
-    vector<int> v = {2, 5, 5, 5, 6, 6, 8, 9, 9, 9};
-    int num = 11;
-    int left_pos = occurence(v, num, true);
-    int right_pos = occurence(v, num, false);
-    if(left_pos != -1 && right_pos != -1)
-    cout << (right_pos - left_pos +1);
+    vector<int> v = {3, 4, 5};
+    auto it = upper_bound(v.begin(), v.end(),3);
+    if(it != v.end())
+    cout << *it << endl;
     else 
-    cout << 0;
+    cout << "end" << endl;
+    print(v);
+    *it = 1;
+    print(v);
+    it = upper_bound(v.begin(), v.end(),1);
+    if(it != v.end())
+    cout << *it << endl;
+    else 
+    cout << "end" << endl;
     return 0;
 }
