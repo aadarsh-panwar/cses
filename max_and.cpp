@@ -7,32 +7,27 @@
 #include <climits>
 
 using namespace std;
-
-int checkBit(int pattern, vector<int>& v) {
-    int count = 0;
-    for(auto it: v) {
-        if((pattern &it) == pattern) 
-        ++count;
-    }
-    return count;
-}
-
-int max_and(vector<int> &v) {
-    int count;
+typedef vector<int> vi;
+int max_and(vi &v) {
     int res = 0;
-    for(int bit = 31;bit >= 0;--bit) {
-        count = checkBit((res | (1 <<bit)),v);
-        if(count >= 2) {
-            res = res | (1 << bit);
+    int ans = 0;
+    for(int i = 31;i>= 0;--i) {
+        res = ans | (1 << i);
+        int cnt = 0;
+        for(auto it : v) {
+            if((it&res) == res)
+            ++cnt;
         }
+        if(cnt >= 2)
+        ans += (1 << i);
     }
-    return res;
-}
+    return ans;
+}   
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(NULL);
-    vector<int> v = {4, 8, 6, 2};
+    vector<int> v = {16,4,8,2,4};
     cout << max_and(v);
     return 0;
 }
